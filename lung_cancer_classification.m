@@ -24,8 +24,7 @@ img_out_disp = sum(abs(img_out).^2, 3).^0.5;
 img_out_disp = img_out_disp./max(img_out_disp(:));
 imshow(img_out_disp);
 title('gabor output, L-2 super-imposed, normalized');
-
-%% This is marker controlled watershed using masking
+%% Marker controlled watershed using masking
 I = img_out_disp;
 se = strel('disk', 20);
 Ie = imerode(I, se);
@@ -37,7 +36,7 @@ bw = im2bw(Iobrcbr, graythresh(Iobr));
 figure
 imshow(bw), title('Thresholded')
 I=bw;
-m = zeros(size(I,1),size(I,2));          %-- create initial mask
+m = zeros(size(I,1),size(I,2)); 
 m(200:320,95:180) = 1;
 m(186:321,348:410) = 1;
 %I = imresize(I,.5);  %-- make image smaller 
@@ -48,9 +47,7 @@ m(186:321,348:410) = 1;
 seg = region_seg(I, m, 1200); %-- Run segmentation
 figure
 imshow(seg); title('Global Region-Based Segmentation')
-
-
-%% Binarization for image classification
+%% For Binarization regarding image classification
 hasil=ones(512,512);
 white=0;
 black=0;
